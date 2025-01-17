@@ -1,0 +1,191 @@
+import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+const TripForm = () => {
+  const [formData, setFormData] = useState({
+    destination: "",
+    startDate: "",
+    endDate: "",
+    arrivalTime: "",
+    departureTime: "",
+    destinationAirport: "",
+    mustVisit: "",
+    pace: "relaxed",
+    budget: "",
+    transport: "",
+    languageHelp: false,
+  });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { destination, startDate, endDate } = formData;
+
+    if (!destination || !startDate || !endDate) {
+      setError("Please fill out all required fields");
+      setSuccess(false);
+      return;
+    }
+
+    if (new Date(startDate) > new Date(endDate)) {
+      setError("Start date cannot be after end date");
+      setSuccess(false);
+      return;
+    }
+
+    setError("");
+    setSuccess(true);
+    console.log("Form Data Submitted:", formData);
+  };
+
+  return (
+    <div
+      className="container mt-5 p-4 border rounded"
+      style={{ backgroundColor: "#f8f9fa" }}
+    >
+      <h2 className="text-center mb-4">Plan Your Trip</h2>
+      {error && <div className="alert alert-danger text-center">{error}</div>}
+      {success && (
+        <div className="alert alert-success text-center">
+          Trip planned successfully!
+        </div>
+      )}
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className="form-label">Destination</label>
+          <input
+            type="text"
+            className="form-control"
+            name="destination"
+            value={formData.destination}
+            onChange={handleChange}
+            placeholder="Enter your destination"
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Start Date</label>
+          <input
+            type="date"
+            className="form-control"
+            name="startDate"
+            value={formData.startDate}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">End Date</label>
+          <input
+            type="date"
+            className="form-control"
+            name="endDate"
+            value={formData.endDate}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Arrival Time</label>
+          <input
+            type="time"
+            className="form-control"
+            name="arrivalTime"
+            value={formData.arrivalTime}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Departure Time</label>
+          <input
+            type="time"
+            className="form-control"
+            name="departureTime"
+            value={formData.departureTime}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Destination Airport</label>
+          <input
+            type="text"
+            className="form-control"
+            name="destinationAirport"
+            value={formData.destinationAirport}
+            onChange={handleChange}
+            placeholder="Enter the destination airport"
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Must Visit Places</label>
+          <input
+            type="text"
+            className="form-control"
+            name="mustVisit"
+            value={formData.mustVisit}
+            onChange={handleChange}
+            placeholder="List the places you must visit"
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Pace</label>
+          <select
+            className="form-select"
+            name="pace"
+            value={formData.pace}
+            onChange={handleChange}
+          >
+            <option value="relaxed">Relaxed</option>
+            <option value="moderate">Moderate</option>
+            <option value="fast">Fast</option>
+          </select>
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Budget</label>
+          <input
+            type="text"
+            className="form-control"
+            name="budget"
+            value={formData.budget}
+            onChange={handleChange}
+            placeholder="Enter your budget"
+          />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Transport Preference</label>
+          <input
+            type="text"
+            className="form-control"
+            name="transport"
+            value={formData.transport}
+            onChange={handleChange}
+            placeholder="e.g., Car, Bus, Train"
+          />
+        </div>
+        <div className="form-check mb-3">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            name="languageHelp"
+            checked={formData.languageHelp}
+            onChange={handleChange}
+          />
+          <label className="form-check-label">
+            Do you need language assistance?
+          </label>
+        </div>
+        <button type="submit" className="btn btn-primary w-100">
+          Submit
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default TripForm;

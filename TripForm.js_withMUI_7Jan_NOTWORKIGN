@@ -1,0 +1,222 @@
+import React, { useState } from "react";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Alert,
+  Container,
+  Checkbox,
+  FormControlLabel,
+  MenuItem,
+  Select,
+  FormControl,
+} from "@mui/material";
+
+const TripForm = () => {
+  const [formData, setFormData] = useState({
+    destination: "",
+    startDate: "",
+    endDate: "",
+    arrivalTime: "",
+    departureTime: "",
+    destinationAirport: "",
+    interests: "",
+    mustVisit: "",
+    pace: "relaxed", // Default value for dropdown
+    budget: "",
+    transport: "",
+    languageHelp: false,
+  });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { destination, startDate, endDate } = formData;
+
+    if (!destination || !startDate || !endDate) {
+      setError("Please fill out all required fields");
+      setSuccess(false);
+      return;
+    }
+
+    if (new Date(startDate) > new Date(endDate)) {
+      setError("Start date cannot be after end date");
+      setSuccess(false);
+      return;
+    }
+
+    setError("");
+    setSuccess(true);
+    console.log("Form Data Submitted:", formData);
+  };
+
+  return (
+    <Container
+      maxWidth="sm"
+      sx={{
+        mt: 4,
+        p: 3,
+        boxShadow: 3,
+        borderRadius: 2,
+        backgroundColor: "white",
+      }}
+    >
+      <Typography variant="h4" align="center" gutterBottom>
+        Plan Your Trip
+      </Typography>
+      {error && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+      )}
+      {success && (
+        <Alert severity="success" sx={{ mb: 2 }}>
+          Trip planned successfully!
+        </Alert>
+      )}
+      <form onSubmit={handleSubmit}>
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            label="Destination"
+            name="destination"
+            variant="outlined"
+            fullWidth
+            value={formData.destination}
+            onChange={handleChange}
+            placeholder="Enter your destination"
+          />
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            label="Start Date"
+            name="startDate"
+            type="date"
+            fullWidth
+            value={formData.startDate}
+            onChange={handleChange}
+            InputLabelProps={{ shrink: true }}
+          />
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            label="End Date"
+            name="endDate"
+            type="date"
+            fullWidth
+            value={formData.endDate}
+            onChange={handleChange}
+            InputLabelProps={{ shrink: true }}
+          />
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            label="Arrival Time"
+            name="arrivalTime"
+            type="time"
+            fullWidth
+            value={formData.arrivalTime}
+            onChange={handleChange}
+            InputLabelProps={{ shrink: true }}
+          />
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            label="Departure Time"
+            name="departureTime"
+            type="time"
+            fullWidth
+            value={formData.departureTime}
+            onChange={handleChange}
+            InputLabelProps={{ shrink: true }}
+          />
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            label="Destination Airport"
+            name="destinationAirport"
+            variant="outlined"
+            fullWidth
+            value={formData.destinationAirport}
+            onChange={handleChange}
+            placeholder="Enter the destination airport"
+          />
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            label="Must Visit Places"
+            name="mustVisit"
+            variant="outlined"
+            fullWidth
+            value={formData.mustVisit}
+            onChange={handleChange}
+            placeholder="List the places you must visit"
+          />
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <FormControl fullWidth>
+            <Select name="pace" value={formData.pace} onChange={handleChange}>
+              <MenuItem value="relaxed">Relaxed</MenuItem>
+              <MenuItem value="moderate">Moderate</MenuItem>
+              <MenuItem value="fast">Fast</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            label="Budget"
+            name="budget"
+            variant="outlined"
+            fullWidth
+            value={formData.budget}
+            onChange={handleChange}
+            placeholder="Enter your budget"
+          />
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            label="Transport Preference"
+            name="transport"
+            variant="outlined"
+            fullWidth
+            value={formData.transport}
+            onChange={handleChange}
+            placeholder="e.g., Car, Bus, Train"
+          />
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="languageHelp"
+                checked={formData.languageHelp}
+                onChange={handleChange}
+              />
+            }
+            label="Do you need language assistance?"
+          />
+        </Box>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ py: 1.5 }}
+        >
+          Submit
+        </Button>
+      </form>
+    </Container>
+  );
+};
+
+export default TripForm;
