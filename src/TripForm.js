@@ -33,7 +33,7 @@ const TripForm = () => {
     try {
       // const response = await fetch("http://localhost:5001/generate-itinerary", {
       const response = await fetch(
-        "https://mysterious-brushlands-03919-edd2212860ad.herokuapp.com:5001/generate-itinerary",
+        "https://mysterious-brushlands-03919-edd2212860ad.herokuapp.com/generate-itinerary",
         {
           method: "POST",
           headers: {
