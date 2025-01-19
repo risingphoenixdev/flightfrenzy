@@ -31,13 +31,17 @@ const TripForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch("http://localhost:5001/generate-itinerary", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ formData }),
-      });
+      // const response = await fetch("http://localhost:5001/generate-itinerary", {
+      const response = await fetch(
+        "https://mysterious-brushlands-03919-edd2212860ad.herokuapp.com:5001/generate-itinerary",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ formData }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to generate itinerary");
