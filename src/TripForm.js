@@ -58,7 +58,28 @@ const TripForm = () => {
   return (
     <div className="container mt-4">
       <h2>Extreme Day Trip Planner</h2>
-      <form onSubmit={handleSubmit}>
+
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <button
+          type="submit"
+          className="btn btn-primary btn-lg"
+          disabled={loading}
+          onClick={handleSubmit}
+        >
+          {loading ? "Generating..." : "Generate Itinerary"}
+        </button>
+        <a
+          href="https://www.buymeacoffee.com/YOUR_USERNAME"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-warning btn-lg"
+          style={{ fontWeight: "bold" }}
+        >
+          ☕ Donate Now
+        </a>
+      </div>
+
+      <form>
         <div className="mb-3">
           <label className="form-label">Arrival Date</label>
           <input
@@ -192,14 +213,19 @@ const TripForm = () => {
             <option value="private">Taxis/Private Transfers</option>
           </select>
         </div>
-
-        <button type="submit" className="btn btn-primary" disabled={loading}>
-          {loading ? "Generating..." : "Generate Itinerary"}
-        </button>
       </form>
 
       {itinerary && (
         <div className="mt-4">
+          <a
+            href="https://www.buymeacoffee.com/YOUR_USERNAME"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-warning btn-lg mb-4 d-block text-center"
+            style={{ fontWeight: "bold" }}
+          >
+            ☕ Donate Now
+          </a>
           <h4>Generated Itinerary</h4>
           <pre>{itinerary}</pre>
           <div className="mt-4 text-center">
@@ -207,9 +233,10 @@ const TripForm = () => {
               href="https://www.buymeacoffee.com/radiantrahul"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-warning"
+              className="btn btn-warning btn-lg"
+              style={{ fontWeight: "bold" }}
             >
-              ☕ Buy Me a Coffee
+              ☕ Donate Now
             </a>
           </div>
         </div>
