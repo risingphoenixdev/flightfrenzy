@@ -56,8 +56,18 @@ const TripForm = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <div className="card shadow-lg p-4">
+    <div
+      className="container mt-5 p-5"
+      style={{
+        backgroundImage: "url('aa2.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        borderRadius: "10px",
+        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
+        color: "#fff",
+      }}
+    >
+      <div className="card shadow-lg p-4 bg-dark text-light">
         <h2 className="text-center mb-4">🌍 Extreme Day Trip Planner</h2>
 
         <div className="text-center mb-4">
@@ -230,7 +240,15 @@ const TripForm = () => {
         {itinerary && (
           <div className="mt-5">
             <h4>Generated Itinerary</h4>
-            <pre className="bg-light p-3 rounded">{itinerary}</pre>
+            <pre
+              className="bg-light p-3 rounded text-dark"
+              style={{
+                whiteSpace: "pre-wrap",
+                wordWrap: "break-word",
+              }}
+            >
+              {itinerary}
+            </pre>
 
             <div className="text-center mt-4">
               <a
