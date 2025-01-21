@@ -60,6 +60,18 @@ const TripForm = () => {
       <div className="card shadow-lg p-4">
         <h2 className="text-center mb-4">🌍 Extreme Day Trip Planner</h2>
 
+        <div className="text-center mb-4">
+          <a
+            href="https://www.buymeacoffee.com/radiantrahul"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-warning btn-lg"
+            style={{ fontWeight: "bold" }}
+          >
+            ☕ Donate Now
+          </a>
+        </div>
+
         <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-md-6 mb-3">
@@ -219,6 +231,18 @@ const TripForm = () => {
           <div className="mt-5">
             <h4>Generated Itinerary</h4>
             <pre className="bg-light p-3 rounded">{itinerary}</pre>
+
+            <div className="text-center mt-4">
+              <a
+                href="https://www.buymeacoffee.com/radiantrahul"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-warning btn-lg"
+                style={{ fontWeight: "bold" }}
+              >
+                ☕ Donate Now
+              </a>
+            </div>
           </div>
         )}
       </div>
