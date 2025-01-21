@@ -68,7 +68,7 @@ const TripForm = () => {
             className="btn btn-warning btn-lg"
             style={{ fontWeight: "bold" }}
           >
-            ☕ Donate Now
+            ☕ Buy me a Coffee
           </a>
         </div>
 
@@ -240,7 +240,7 @@ const TripForm = () => {
                 className="btn btn-warning btn-lg"
                 style={{ fontWeight: "bold" }}
               >
-                ☕ Donate Now
+                ☕ Buy me a Coffee
               </a>
             </div>
           </div>
